@@ -1,0 +1,83 @@
+{% include 'base.html' %}
+{% block content %}
+    <div class="page-wrapper">
+           <div class="container-fluid">
+           		<div class="container">
+           			<div class="row">
+           				<div class="row">
+           					<div class="col">
+           						<h3>Lecture Time Table</h3>
+           					</div>
+           					<div class="col">
+	           					<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+			           				{% if user.is_superuser%}
+							        <a href="{% url 'CreateTimeTable' %}" class="btn btn-lg btn-outline-primary float-right h1"> Add  Time Table </a>
+							        {% endif %}
+	    						</div>	
+           					</div>
+           				</div>
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Lecture</th>
+					      <th scope="col">Leacturare</th>
+					      <th scope="col">Date</th>
+					      <th scope="col">Time</th>
+					      <th scope="col">Place</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in timetable_list %}
+					    <tr>
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.lecture.subject }}</td>
+					      <td>{{obj1.lecture.leacturare.user.first_name}} {{obj1.lecture.leacturare.user.last_name}}</td>
+                          <td>{{ obj1.date }}</td>
+					      <td>{{ obj1.time }}</td>
+					      <td>{{ obj1.place }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+			</div></div>
+			     <div class="row">
+			     	<div class="row">
+			     		<div class="col">
+			     			<h3>Exam Time Table</h3>
+			     		</div>
+			     		<div class="col">
+			     			<div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+           				{% if user.is_superuser %}
+        <a href="{% url 'CreateExamTimeTable' %}" class="btn btn-lg btn-outline-primary float-right h1"> Add exam time table </a>
+        {% endif %}
+    </div>
+			     		</div>
+			     	</div>	
+           			
+					<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Lecture</th>
+					      <th scope="col">Date</th>
+					      <th scope="col">Time</th>
+					      <th scope="col">Place</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in examtimetable %}
+					    <tr>
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.lecture.subject }}</td>
+                          <td>{{ obj1.date }}</td>
+					      <td>{{ obj1.time }}</td>
+					      <td>{{ obj1.place }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+			</div></div>
+		</div>
+	</div>
+{% endblock %}

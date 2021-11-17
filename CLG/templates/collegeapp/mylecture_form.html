@@ -1,0 +1,36 @@
+{% include 'base.html' %}
+<body>
+    <div class="page-wrapper">
+           <div class="container-fluid">
+            {% block content %}
+                <div class="container">
+                    <div class="card w-50 p-5">
+                        <div class="text-center">
+                            <h2>Lecture Form</h2>
+                            <div class="bg-primary w-25 mx-auto">
+                            <hr>
+                            </div>
+                        </div>
+                         <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_subject">Subject:</label> 
+                                <input type="text" class="form-control" name="subject" maxlength="100" required="" id="id_subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_leacturare">Leacturare:</label>
+                                <select name="leacturare" required="" id="id_leacturare" hidden="">
+                                    {% for i in Leacturare %}
+                                    <option value="{{i.id}}" selected="">{{i}}</option>
+                                    {% endfor %}
+
+                                </select>
+                                <input class="form-control" placeholder="{{user}}-{{user.id}}" disabled="">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Schedule</button>
+                          </form>
+                    </div>
+                </div>
+{% endblock %}
+</div></div>
+</body>

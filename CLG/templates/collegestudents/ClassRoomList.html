@@ -1,0 +1,82 @@
+{% include 'base.html' %}
+{% block content %}
+    <div class="page-wrapper">
+           <div class="container-fluid">
+           		<div class="container text-center">
+           			
+    <div class=" p-3 m-2">
+    	<div class="row p-3 m-2 border-top border-info shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>Student Marks</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateMarks' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Marks</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Student name</th>
+					      <th scope="col">Lecture</th>
+					      <th scope="col">marks</th>
+					      <th scope="col">Max</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in marks %}
+					    <tr class="border-top border-secondry m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.student }}-{{obj1.student.id}}</td>
+					      <td>{{obj1.subject}}</td>
+					      <td>{{ obj1.mark }}</td>
+					      <td>{{ obj1.total_marks }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    	<div class="row border-top border-info p-3 m-2 shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>Attendance</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateAttendance' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Attendance</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Student name</th>
+					      <th scope="col">Lecture</th>
+					      <th scope="col">Attendance</th>
+					      <th scope="col">Max</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in attendance %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.student }}-{{obj1.student.id}}</td>
+					      <td>{{ obj1.subject }}</td>
+					      <td>{{ obj1.attendance }}</td>
+					      <td>{{ obj1.total_attendance }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    </div>
+		</div>
+		</div>
+	</div>
+{% endblock %}

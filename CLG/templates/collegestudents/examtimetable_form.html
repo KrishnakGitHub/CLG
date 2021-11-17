@@ -1,0 +1,24 @@
+{% include 'base.html' %}
+<body>
+    <div class="page-wrapper">
+           <div class="container-fluid">
+            {% block content %}
+                <div class="container">
+                    <div class="card w-50 p-5">
+                        <div class="text-center">
+                            <h2>Exam Time Table Form</h2>
+                            <div class="bg-primary w-25 mx-auto">
+                            <hr>
+                            </div>
+                        </div>
+                       <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+<button type="submit" class="btn btn-primary">Schedule</button>
+</form>
+                     
+                    </div>
+                </div>
+{% endblock %}
+</div></div>
+</body>

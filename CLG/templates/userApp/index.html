@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+</head>
+<body>
+	<h1>Dashboard</h1>
+
+
+
+{% if user.is_authenticated %}
+{{user}}
+<h2>Upcoming Lectures</h2>
+{% for a in lecture %}
+	{{a}}
+{% endfor %}
+<br>
+<h2>Time Table</h2>
+{% for b in timetable %}
+	{{b}}
+{% endfor %}
+<br>
+<h2>Fees</h2>
+{% for c in fee %}
+	{{c}}
+{% endfor %}
+<br>
+<h2>Wages</h2>
+{% for d in wages %}
+	{{d}}
+{% endfor %}
+<br>
+{% if user.is_superuser %}
+{{msg}}
+<a href="accounts/signup/student/">Add Student</a>
+<a href="accounts/signup/lecturer/">Add Lecturer</a>
+<a href="accounts/signup/employee/">Add Employee</a>
+<a href="crdept/">Add Department</a>
+<a href="college/CreateFee/">Create Fee</a>
+<a href="college/CreateWages/">Create Wages</a>
+<a href="college/CreateLecture/">Create Lecture</a>
+<a href="college/CreateTimeTable/">Create TimeTable</a>
+
+{% for i in myuser %}
+{{i}}
+{{i.is_student}}
+{%endfor%}
+{%endif%}
+<a href="/accounts/logout/">Logout</a>
+{% else %}
+<a href="/login/">Login</a>
+{% endif %}
+</body>
+</html>

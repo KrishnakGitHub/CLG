@@ -1,0 +1,264 @@
+{% include 'base.html' %}
+{% block content %}
+    <div class="page-wrapper">
+           <div class="container-fluid">
+           		<div class="container text-center">
+       {% if not user.is_lecturer %}    			
+    <div class="row p-3 m-2">
+    	<div class="col p-3 m-2 border-top border-info shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>My Marks</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateFee' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Fee</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Subject</th>
+					      <th scope="col">Marks</th>
+					      <th scope="col">Max Marks</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in marks %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.subject }}</td>
+					      <td>{{ obj1.mark }}</td>
+					      <td>{{ obj1.total_marks }}</td>
+					    </tr>
+					    {% endfor %}
+					    <tr><td></td>
+					  		<td colspan="1">Total</td>
+					  		<td>{{total_mark}}</td>
+					  	</tr>
+					  </tbody>
+				</table>
+    	</div>
+    	<div class="col border-top border-info p-3 m-2 shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>My Attendance</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateAttendance' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Attendance</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Subject</th>
+					      <th scope="col">Attend.</th>
+					      <th scope="col">Max Attend.</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in attendance %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.subject }}</td>
+					      <td>{{ obj1.attendance }}</td>
+					      <td>{{ obj1.total_attendance }}</td>
+					    </tr>
+					    {% endfor %}
+					    <tr>
+					    	<td></td>
+					  		<td colspan="1">Total</td>
+					  		<td>{{total_attend}}</td>
+					  	</tr>
+					  </tbody>
+				</table>
+    	</div>
+    </div><br>{% endif %}
+
+    {% if user.is_lecturer %}    			
+    <div class="row p-3 m-2">
+    	<div class="col-4 p-3 m-2 border-top border-info shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>My Subjects</h3>
+    			</div>
+    			<div class="col">
+    				<a href="{% url 'MyLectureCreate' %}" class="btn btn-sm btn-outline-primary float-right h1">New Subject</a>
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Subject</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in mysubject %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.subject }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    	<div class="col border-top border-info p-3 m-2 shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>My Time Table</h3>
+    			</div>
+    			<div class="col">
+    				
+    				<a href="{% url 'MyTimeTableCreate' %}" class="btn btn-sm btn-outline-primary float-right h1">Add  Time Table</a>
+    				
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Subject</th>
+					      <th scope="col">Date</th>
+					      <th scope="col">Time</th>
+					      <th scope="col">Place</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in mytimetable %}
+					  	 {% for i in obj1%}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ i.lecture }}</td>
+					      <td>{{ i.date }}</td>
+					      <td>{{ i.time }}</td>
+					      <td>{{ i.place }}</td>
+					    </tr>
+					    {% endfor %}
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    </div><br>
+    <div class="row p-3 m-2">
+    	<div class="col p-3 m-2 border-top border-info shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>My Students</h3>
+    			</div>
+    			<div class="col">
+    				<!-- {% if user.is_superuser %}
+    				<a href="{% url 'CreateFee' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Fee</a>
+    				{% endif %} -->
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Student</th>
+					      <th scope="col">Subject</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in marks %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.student }}</td>
+					      <td>{{ obj1.subject }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    </div>
+    {% endif %}
+    
+    {% if user.student %}
+        <div class="row p-3 m-2">
+    	<div class="col p-3 m-2 border-top border-info shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>My Subjects</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateFee' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Fee</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Subject</th>
+					      <th scope="col">Max Marks</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in marks %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.subject }}</td>
+					      <td>{{ obj1.total_marks }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    </div><br>
+    {% endif %}
+
+    {% if user.is_superuser %}
+    <div class="row border-top border-info p-3 m-2 shadow">
+    <div class="row">
+    	<div class="col p-2">
+    		<h2>Students Fee status</h2>
+    	</div>
+    	<div class="col p-2">
+    		{% if user.is_superuser %}
+        	<a href="{% url 'CreateMarks' %}" class="btn btn-sm btn-outline-primary float-right h1"> Add  Marks</a>
+        	{% endif %}
+    	</div>
+    </div>
+		<hr><br>			<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Fee</th>
+					      <th scope="col">Fee Pending</th>
+					      <th scope="col">Wages</th>
+					      <th scope="col">Wages Pending</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in studentfnw_list %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.student.user.first_name }} {{ obj1.student.user.last_name }}</td>
+					      <td>{{obj1.fee}}-{{obj1.fee.course_fee}}</td>
+                          <td>{{ obj1.is_fee_pending }}</td>
+					      <td>{{ obj1.wages }}-{{obj1.wages.amount}}</td>
+					      <td>{{ obj1.is_wages_pending }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+			</div>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+{% endblock %}

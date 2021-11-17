@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Create Department</title>
+      <!-- Bootstrap Core CSS -->
+    <link href="{% static 'assets/node_modules/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/node_modules/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet">
+    <style>
+      .bg{
+        background-image: url("{% static 'img/subtle-prism.svg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+    </style>
+</head>
+<body class="bg">
+  <!--div class="container-fluid bg-primary text-center p-2 text-white"><h2>College</h2></div-->
+  <div class="container-fluid p-5">
+    <div class="container text-center text-info p-2" style="background-color:transparent;"><h1>My COLLEGE</h1></div>
+    <div class="card w-50 m-5 p-5 mx-auto shadow-lg border-info" style="background-color: transparent;">
+      <div class="text-center">
+        <h2>Login Form</h2>
+        <div class="bg-primary mx-auto">
+        <hr>
+        </div>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_username">Username:</label>
+          <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="id_password">Password:</label>
+          <input type="password" name="password" autocomplete="current-password" required="" id="id_password" class="form-control">
+        </div>
+        <div class="text-center mt-2">
+        <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+</form>
+    </div>
+    <div class="container p-3 text-center"><p>@If you have credentials please login, and if not , please contact with admin</p></div>
+  </div>
+</body>
+</html>

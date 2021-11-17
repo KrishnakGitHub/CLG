@@ -1,0 +1,92 @@
+{% include 'base.html' %}
+<body>
+    <div class="page-wrapper">
+           <div class="container-fluid">
+            {% block content %}
+            
+                <div class="container">
+                	<h2>My Profile</h2>
+                	<br><hr><br>
+                    <div class="row">
+                    	<div class="col-2">
+                    		<p>User </p>
+                    	</div>
+                    	<div class="col-2">
+                    		<p><b>{{user}}</b></p>
+                    	</div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-2">
+                    		<p>Name </p>
+                    	</div>
+                    	<div class="col-2">
+                    		<p><b>{{user.first_name}} {{user.last_name}}</b></p>
+                    	</div>
+                    </div>
+                    <div class="row">
+                    	{% if user.is_student %}
+                    	<div class="col-2">
+                    		<p>User Type </p>
+                    	</div>
+                    	<div class="col-2">
+                    		<p><b>Student</b></p>
+                    	</div>
+                    	{% endif %}
+                    	{% if user.is_lecturer %}
+                    	<div class="col-2">
+                    		<p>User Type </p>
+                    	</div>
+                    	<div class="col-2">
+                    		<p><b>Leacturarer</b></p>
+                    	</div>
+                    	{% endif %}
+                    	{% if user.is_employee %}
+                    	<div class="col-2">
+                    		<p>User Type </p>
+                    	</div>
+                    	<div class="col-2">
+                    		<p><b>Employee</b></p>
+                    	</div>
+                        <div class="col-2">
+                            <p>Employee Type </p>
+                        </div>
+                        <div class="col-2">
+                            <p><b>{{user.employee.Employee_Type}}</b></p>
+                        </div>
+                    	{% endif %}
+                    </div>
+                    {% if user.is_student %}
+                    <br>
+                    <h2>Fee Status</h2>
+                	<hr><br>
+                    {% if studentfnw.is_fee_pending %}
+                    <div class="row">
+                    	<div class="col-2">
+                    		<p>Fee Panding </p>
+                    	</div>
+                        <div class="col-2">
+                            <p><b>{{studentfnw.fee.course_fee}}</b></p>
+                        </div>
+                        <div class="col-2">
+                            <p><b>{{studentfnw.fee}}</b></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if studentfnw.is_wages_pending %}
+                    <div class="row">
+                        <div class="col-2">
+                            <p>Wages Panding </p>
+                        </div>
+                        <div class="col-2">
+                            <p><b>{{studentfnw.wages.amount}}</b></p>
+                        </div>
+                        <div class="col-2">
+                            <p><b>{{studentfnw.wages}}</b></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+{% endif %}
+{% endblock %}
+</div></div>
+</body>

@@ -1,0 +1,123 @@
+{% include 'base.html' %}
+{% block content %}
+    <div class="page-wrapper">
+           <div class="container-fluid">
+           		<div class="container text-center">
+           			
+    <div class="row p-3 m-2">
+    	<div class="col p-3 m-2 border-top border-info shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>Fee</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateFee' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Fee</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Fee name</th>
+					      <th scope="col">Fee amount</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in fee %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.name }}</td>
+					      <td>{{ obj1.course_fee }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    	<div class="col border-top border-info p-3 m-2 shadow">
+    		<div class="row">
+    			<div class="col p-2">
+    				<h3>Wages</h3>
+    			</div>
+    			<div class="col">
+    				{% if user.is_superuser %}
+    				<a href="{% url 'CreateWages' %}" class="btn btn-sm btn-outline-primary float-right h1">Create Wages</a>
+    				{% endif %}
+    			</div>
+    		</div>
+    		<hr>
+    		<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Wage name</th>
+					      <th scope="col">Wage amount</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in wages %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.name }}</td>
+					      <td>{{ obj1.amount }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+    	</div>
+    </div><br>
+    {% if not user.is_superuser %}
+    {% if user.myuser.is_student %}
+    {% if queryset.is_fee_pending %}
+    <h2>Your fee is pending ! please submit as soon as possible</h2>
+    {% endif %}
+    {% if queryset.is_wages_pending %}
+    <h2>Your wages is pending ! please submit as soon as possible</h2>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+
+    {% if user.is_superuser %}
+    <div class="row border-top border-info p-3 m-2 shadow">
+    <div class="row">
+    	<div class="col p-2">
+    		<h2>Students Fee status</h2>
+    	</div>
+    	<div class="col p-2">
+    		{% if user.is_superuser %}
+        	<a href="{% url 'Feestatuscreate' %}" class="btn btn-sm btn-outline-primary float-right h1"> Add  Fee Status</a>
+        	{% endif %}
+    	</div>
+    </div>
+		<hr><br>			<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Name</th>
+					      <th scope="col">Fee</th>
+					      <th scope="col">Fee Pending</th>
+					      <th scope="col">Wages</th>
+					      <th scope="col">Wages Pending</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  	 {% for obj1 in studentfnw_list %}
+					    <tr class="border-top m-1">
+					      <th scope="row">{{obj1.id}}</th>
+					      <td>{{ obj1.student.user.first_name }} {{ obj1.student.user.last_name }}</td>
+					      <td>{{obj1.fee}}-{{obj1.fee.course_fee}}</td>
+                          <td>{{ obj1.is_fee_pending }}</td>
+					      <td>{{ obj1.wages }}-{{obj1.wages.amount}}</td>
+					      <td>{{ obj1.is_wages_pending }}</td>
+					    </tr>
+					    {% endfor %}
+					  </tbody>
+				</table>
+			</div>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+{% endblock %}

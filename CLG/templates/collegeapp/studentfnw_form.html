@@ -1,0 +1,61 @@
+{% include 'base.html' %}
+<body>
+    <div class="page-wrapper">
+           <div class="container-fluid">
+            {% block content %}
+                <div class="container">
+                    <div class="card w-50 p-5">
+                        <div class="text-center">
+                            <h2>{{type}} Form</h2>
+                            <div class="bg-primary w-25 mx-auto">
+                            <hr>
+                            </div>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="id_student">Student:</label> 
+                                <select class="form-select" name="student" required="" id="id_student">
+                                  <option selected>Select Student</option>
+                                  {% for i in students %}
+                                  <option value="{{i.id}}">{{i}}-{{i.user}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_fee">Fee:</label>
+                                <select class="form-select" name="fee" id="id_fee">
+                                  <option selected>Select Fee</option>
+                                  {% for i in fee %}
+                                  <option value="{{i.id}}">{{i}}-{{i.course_fee}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_wages">Wages:</label>
+                                <select class="form-select" name="wages" id="id_wages">
+                                  <option selected>Select Fee</option>
+                                  {% for i in wages %}
+                                  <option value="{{i.id}}">{{i}}-{{i.amount}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+
+                            <input type="checkbox" id="vehicle1" name="is_fee_pending">
+                            <label for="vehicle1">Is fee pending</label><br>
+
+                            <input type="checkbox" id="vehicle2" name="is_wages_pending">
+                            <label for="vehicle2">Is wages pending</label><br>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+{% endblock %}
+</div></div>
+</body>

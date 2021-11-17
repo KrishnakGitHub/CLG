@@ -1,0 +1,62 @@
+{% include 'base.html' %}
+<body>
+    <div class="page-wrapper">
+           <div class="container-fluid">
+            {% block content %}
+                <div class="container">
+                    <div class="card w-50 p-5">
+                        <div class="text-center">
+                            <h2>{{type}} Form</h2>
+                            <div class="bg-primary w-25 mx-auto">
+                            <hr>
+                            </div>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_subject">Subject:</label> 
+                                <select class="form-select" name="subject" required="" id="id_subject">
+                                  <option selected>Select Subject</option>
+                                  {% for i in subject %}
+                                  <option value="{{i.id}}">{{i}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_attendance">Attendence:</label> 
+                                <input type="number" name="attendance" required="" id="id_attendance" class="form-control"></div>
+
+                            <div class="form-group">
+                                <label for="id_total_attendance">Total Attendence:</label> 
+                                <input type="number" name="total_attendance" required="" id="id_total_attendance" class="form-control"></div>
+
+                            <div class="form-group">
+                                <label for="id_student">Student:</label>
+                                <select class="form-select" name="student" required="" id="id_student">
+                                  <option selected>Select Student</option>
+                                  {% for i in students %}
+                                  <option value="{{i.id}}">{{i}}-{{i.id}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_given_by">Given by:</label>  
+                                <select class="form-select" name="given_by" required="" id="id_given_by">
+                                  <option selected>Select Leacturare</option>
+                                  {% for j in leacturare %}
+                                  <option value="{{j.id}}">{{j}}</option>
+                                  {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+{% endblock %}
+</div></div>
+</body>

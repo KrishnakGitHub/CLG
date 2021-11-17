@@ -1,0 +1,136 @@
+{% include 'base.html' %}
+{% block content %}
+    <div class="page-wrapper">
+           <div class="container-fluid">
+	<div class="container">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Students</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Lecturers</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Employees</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+      {% if user.is_superuser %}
+        <a href="{% url 'student_signup' %}" class="btn btn-lg btn-outline-primary float-right h1"> Add  Student </a>
+      {% endif %}
+    </div>
+
+     <h2 class="text-center">Students List</h2>
+<hr>
+  	
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Department</th>
+    </tr>
+  </thead>
+  <tbody>
+  	 {% for i in myuser_list %}
+  	 {% if i.is_student %}
+    <tr>
+      <th scope="row">{{i.id}}</th>
+      <td>{{ i.first_name }} {{ i.last_name }}</td>
+      <td>{{ i.student.department }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  	    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+        {% if user.is_superuser %}
+        <a href="{% url 'lecturer_signup' %}" class="btn btn-lg btn-outline-primary float-right h1"> Add  lecturer </a>
+        {% endif %}
+    </div>
+
+    <div>
+		<h2 class="text-center">Lecturers list</h2><hr>
+	</div>
+  		<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Department</th>
+    </tr>
+  </thead>
+  <tbody>
+  	 {% for i in myuser_list %}
+  	 {% if i.is_lecturer %}
+    <tr>
+      <th scope="row">{{i.id}}</th>
+      <td>{{ i.first_name }} {{ i.last_name }}</td>
+      <td>{{ i.lecturer.department }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% for obj2 in lec_object_list %}
+    <tr>
+      <th scope="row">{{obj2.id}}</th>
+      <td>{{ obj2.name }} - Lecturer</td>
+      <td>{% for obj in obj2.Department.all %}
+      		{{obj}},
+      	  {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  	       <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+        {% if user.is_superuser %}
+        <a href="{% url 'employee_signup' %}" class="btn btn-lg btn-outline-primary float-right h1"> Add  employee </a>
+        {% endif %}
+    </div>
+
+    <div>
+ 	<h2 class="text-center">Employes list</h2><hr>
+	</div>
+	  		<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Department</th>
+    </tr>
+  </thead>
+  <tbody>
+  	 {% for i in myuser_list %}
+  	 {% if i.is_employee %}
+    <tr>
+      <th scope="row">{{i.id}}</th>
+      <td>{{ i.first_name }} {{ i.last_name }}</td>
+      <td>{{ i.employee.Employee_Type }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% for obj2 in lec_object_list %}
+    <tr>
+      <th scope="row">{{obj2.id}}</th>
+      <td>{{ obj2.name }} - Lecturer</td>
+      <td>{% for obj in obj2.Department.all %}
+      		{{obj}},
+      	  {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+</div>
+</div></div>
+{% endblock %}
